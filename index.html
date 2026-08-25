@@ -1,11 +1,54 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pomodoro Timer</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- Main Physical Device Shell -->
+    <div class="device-card">
+        
+        <!-- White LCD Screen -->
+        <div class="lcd-screen">
+            <span class="session-label">SESSION</span>
+            <div id="timer-display">25:00</div>
+            
+            <div class="main-buttons">
+                <button id="start-btn">Start</button>
+                <button id="reset-btn">Reset</button>
+            </div>
+        </div>
+
+        <!-- Lower Controls Section -->
+        <div class="controls-row">
+            
+            <!-- Break Length Control Box -->
+            <div class="control-card">
+                <div class="screen-box">
+                    <button class="btn-adjust">-</button>
+                    <span class="length-val">5</span>
+                    <button class="btn-adjust">+</button>
+                </div>
+                <span class="control-label">Break Length</span>
+            </div>
+
+            <!-- Session Length Control Box -->
+            <div class="control-card">
+                <div class="screen-box">
+                    <button class="btn-adjust">-</button>
+                    <span class="length-val">25</span>
+                    <button class="btn-adjust">+</button>
+                </div>
+                <span class="control-label">Session Length</span>
+            </div>
+
+        </div>
+
+    </div>
 
 </body>
 </html>
