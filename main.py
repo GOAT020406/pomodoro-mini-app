@@ -1,24 +1,20 @@
 import eel
-import sys
+import os
 import signal
 
-# Clean exit handler
+# Clean exit handler that forces a true 0 exit code
 def exit_gracefully(sig, frame):
     print("\n[INFO] Closing Pomodoro App...")
-    sys.exit(0)
+    os._exit(0)  # Immediately exits with code 0 (Success)
 
-# Intercept Ctrl+C / interrupt signals
+# Intercept Ctrl+C / SIGINT
 signal.signal(signal.SIGINT, exit_gracefully)
 
-# 1. Initialize web directory
 eel.init('web')
 
-# 2. Print startup status
 print("[INFO] Launching Pomodoro Desktop App...")
 
 try:
-    # 3. Start window (Blocking call)
-    eel.start('index.html', size=(380, 520))
-    print("\n[INFO] App window closed by user.")
+    eel.start('index.html', size=(380, 520), close_callback=lambda page, sockets: os._exit(0))
 except (SystemExit, KeyboardInterrupt):
-    print("\n[INFO] Exiting Pomodoro App cleanly.")
+    os._exit(0)
