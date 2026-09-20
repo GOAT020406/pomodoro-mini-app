@@ -135,6 +135,14 @@ startBtn.addEventListener('click', toggleTimer);
 resetBtn.addEventListener('click', resetTimer);
 snoozeBtn.addEventListener('click', snoozeTimer); // Attached Snooze listener
 
+window.addEventListener('beforeunload', () => {
+    try {
+        eel.close_app();
+    } catch (error) {
+        console.log('Close hook error:', error);
+    }
+});
+
 // Connect the plus/minus buttons dynamically
 const adjustButtons = document.querySelectorAll('.btn-adjust');
 adjustButtons[0].addEventListener('click', () => changeTime('break', -1)); // Break -
