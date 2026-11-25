@@ -1,62 +1,48 @@
-
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* 1. Remove white margins and extra background space */
-html, body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden; /* Removes scrollbars completely */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f8f9fa; /* Matches app background */
-}
-
-/* 2. Make your main widget container fill the window cleanly */
-.container, .app-container, .timer-card { 
-  width: 90%;
-  height: 90%;
-  margin: auto;
-  box-sizing: border-box;
+html,
+body {
+    width: 100%;
+    min-height: 100dvh;
 }
 
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #fdfcfc;
-    font-family: 'Courier New', Courier, monospace;
-}
-
-
-.device-container {
-
-    display: flex;
+    padding: clamp(10px, 3vw, 28px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #fdfcfc;
+    font-family: 'Courier New', Courier, monospace;}
+.device-container {display: flex;
     justify-content: center;
     align-items: center;
-    width: 280px;
-    height: 420px;
-    margin: 30px auto;
-    padding: 14px;
+    width: min(290px, 100%);
+    min-height: min(420px, 92dvh);
+    padding: clamp(10px, 3vw, 14px);
     background-color: darksalmon;
     border: 2px solid #2c2c2c;
-    border-radius: 30px;
+    border-radius: clamp(20px, 6vw, 30px);
 }
 
 .device-card {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    justify-content: space-between;
+    gap: clamp(12px, 2.5vh, 16px);
     width: 100%;
-    padding: 14px;
+    height: 100%;
+    padding: clamp(10px, 2.5vw, 14px);
     background-color: #c2cbce;
-
-    border: 2px solid #2c2c2c;
-    border-radius: 20px;
+ border: 2px solid #2c2c2c;
+    border-radius: clamp(14px, 4vw, 20px);
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
 }
 
@@ -64,47 +50,43 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 14px 10px;
+    padding: clamp(12px, 2.5vh, 16px) 10px;
     background-color: #ffffff;
     border: 2px solid #2c2c2c;
     border-radius: 14px;
-    text-align: center;
-
-}
+    text-align: center;}
 
 .session-label {
     color: #2c2c2c;
-    font-size: 0.8rem;
+    font-size: clamp(0.7rem, 2.2vw, 0.8rem);
     font-weight: bold;
-    letter-spacing: 2px;
-
-}
+    letter-spacing: 2px;}
 
 #timer-display {
     margin: 8px 0 12px;
     color: #000000;
-    font-size: 3rem;
+    font-size: clamp(2.25rem, 11vw, 3.2rem);
     font-weight: bold;
-    line-height: 1;
-}
-
+    font-variant-numeric: tabular-nums;
+    line-height: 1;}
 
 .main-buttons {
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     gap: 7px;
 }
 
 .main-buttons button {
-    flex: 1;
+    flex: 1 1 65px;
     min-width: 0;
     min-height: 36px;
-    padding: 5px 3px;
+    padding: 5px 4px;
     background-color: #ffffff;
     border: 2px solid #2c2c2c;
     border-radius: 7px;
     font-family: inherit;
-    font-size: 0.78rem;
+    font-size: clamp(0.7rem, 2.2vw, 0.78rem);
     font-weight: bold;
     cursor: pointer;
 }
@@ -126,36 +108,31 @@ body {
 
 .controls-row {
     display: flex;
-    gap: 10px;
-}
-
+    flex-wrap: wrap;
+    gap: 10px;}
 .control-card {
-
-    display: flex;
-    flex: 1;
+display: flex;
+    flex: 1 1 100px;
     min-width: 0;
     flex-direction: column;
     align-items: center;
     padding: 8px;
     background-color: #2c2c2c;
-    border-radius: 8px;
-}
-
+    border-radius: 8px;}
 
 .screen-box {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    gap: 4px;
     width: 100%;
     min-height: 38px;
-    background-color: #a4c4c8;
-
-    border-radius: 5px;
-
+    padding: 0 4px;
+background-color: #a4c4c8;    border-radius: 5px;
 }
 
 .btn-adjust {
-    min-width: 30px;
+    min-width: 28px;
     min-height: 32px;
     padding: 0;
     background: none;
@@ -163,9 +140,7 @@ body {
     font-family: inherit;
     font-size: 1.2rem;
     font-weight: bold;
-    cursor: pointer;
-
-}
+    cursor: pointer;}
 
 .btn-adjust:hover {
     color: #7d3f39;
@@ -177,7 +152,7 @@ body {
 
 .length-val {
     min-width: 2ch;
-    font-size: 1.1rem;
+    font-size: clamp(0.95rem, 3vw, 1.1rem);
     font-weight: bold;
     text-align: center;
 }

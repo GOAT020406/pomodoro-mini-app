@@ -128,7 +128,11 @@ function changeTime(type, amount) {
 
 
 // --- UPDATED EVENT LISTENERS ---
-
+window.addEventListener("beforeunload", () => {
+  if (typeof eel !== "undefined") {
+    eel.close_app();
+  }
+});
 
 // --- 7. EVENT LISTENERS ---
 startBtn.addEventListener('click', toggleTimer);

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page for pomodoro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="index" href="index.html">
+</head>
+<body>
+    <!--outer device container-->
+  <div class="device-container"> 
+    <!-- Main Physical Device Shell -->
+    <div class="device-card">
+        
+        <!-- White  Screen -->
+        <div class="lcd-screen">
+            <span class="session-label">WELCOME!!</span>
+            <div id="pomo-header">⭐Pomodoro-Timer⭐</div>
+            
+            <div class="main-buttons">
+                <button id="start-btn">Start</button>
+                <button id="snooze-btn">Snooze</button>
+                <button id="reset-btn">Reset</button>
+            </div>
+        </div>
+
+        <!-- Lower Controls Section -->
+        <div class="controls-row">
+            
+            <!-- Break Length Control Box -->
+            <div class="control-card">
+                <div class="screen-box">
+                    <button class="btn-adjust">-</button>
+                    <span class="length-val">5</span>
+                    <button class="btn-adjust">+</button>
+                </div>
+                <span class="control-label">Break Length</span>
+            </div>
+
+            <!-- Session Length Control Box -->
+            <div class="control-card">
+                <div class="screen-box">
+                    <button class="btn-adjust">-</button>
+                    <span class="length-val">25</span>
+                    <button class="btn-adjust">+</button>
+                </div>
+                <span class="control-label">Session Length</span>
+            </div>
+  </div>
+    </div>
+  </div>
+<script src="script.js"></script>
+    
+</body>
+</html>
