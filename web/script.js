@@ -127,25 +127,30 @@ function changeTime(type, amount) {
 }
 
 
-// --- UPDATED EVENT LISTENERS ---
-window.addEventListener("beforeunload", () => {
-  if (typeof eel !== "undefined") {
-    eel.close_app();
-  }
+// ---  CLOSE / LIFECYCLE LOGIC ---
+function closeApp() {
+    if (typeof eel !== 'undefined' && typeof eel.close_app === 'function') {
+        eel.close_app();
+        return;
+    }
+    window.close();
+}
+
+window.addEventListener('beforeunload', () => {
+    if (typeof eel !== 'undefined' && typeof eel.close_app === 'function') {
+        eel.close_app();
+    }
 });
+
 
 // --- 7. EVENT LISTENERS ---
 startBtn.addEventListener('click', toggleTimer);
 resetBtn.addEventListener('click', resetTimer);
 snoozeBtn.addEventListener('click', snoozeTimer); // Attached Snooze listener
 
-window.addEventListener('beforeunload', () => {
-    try {
-        eel.close_app();
-    } catch (error) {
-        console.log('Close hook error:', error);
-    }
-});
+if (closeAPPBtn) {
+    closeAPPBtn.addEventListener('click', closeApp);
+}
 
 // Connect the plus/minus buttons dynamically
 const adjustButtons = document.querySelectorAll('.btn-adjust');
@@ -154,5 +159,12 @@ adjustButtons[1].addEventListener('click', () => changeTime('break', 1));  // Br
 adjustButtons[2].addEventListener('click', () => changeTime('session', -1)); // Session -
 adjustButtons[3].addEventListener('click', () => changeTime('session', 1));  // Session +
 
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch((err) => {
+            console.error('SW registration failed:', err);
+        });
+    });
+}
 // Initial setup on page load
 updateDisplay();

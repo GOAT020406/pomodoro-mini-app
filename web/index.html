@@ -6,14 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pomodoro Timer</title>
     <link rel="stylesheet" href="style.css">
-    
+    <!-- ADD inside <head> -->
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#c2cbce">
+
 </head>
 <body>
    <!--outer device container-->
   <div class="device-container"> 
     <!-- Main Physical Device Shell -->
     <div class="device-card">
-        
+      <!-- ADD right inside <div class="device-card">, above <div class="lcd-screen"> -->
+<div class="top-bar">
+    <button type="button" id="close-app-btn" class="close-btn" aria-label="Close app">&times;</button>
+</div>  
         <!-- White  Screen -->
         <div class="lcd-screen">
             <span class="session-label">SESSION</span>

@@ -21,11 +21,12 @@ body {
     overflow-y: auto;
     background-color: #fdfcfc;
     font-family: 'Courier New', Courier, monospace;}
-.device-container {display: flex;
+.device-container {
+    display: flex;
     justify-content: center;
     align-items: center;
     width: min(290px, 100%);
-    min-height: min(420px, 92dvh);
+  
     padding: clamp(10px, 3vw, 14px);
     background-color: darksalmon;
     border: 2px solid #2c2c2c;
@@ -163,4 +164,36 @@ background-color: #a4c4c8;    border-radius: 5px;
     font-size: 0.68rem;
     font-weight: bold;
     text-align: center;
+}
+.top-bar {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: -8px;
+}
+
+.close-btn {
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border: 2px solid #2c2c2c;
+    border-radius: 6px;
+    color: #2c2c2c;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    background-color: #d96b62;
+    color: #ffffff;
+}
+
+.close-btn:active {
+    transform: translateY(1px);
 }
