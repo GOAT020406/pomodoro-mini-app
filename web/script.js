@@ -127,20 +127,8 @@ function changeTime(type, amount) {
 }
 
 
-// ---  CLOSE / LIFECYCLE LOGIC ---
-function closeApp() {
-    if (typeof eel !== 'undefined' && typeof eel.close_app === 'function') {
-        eel.close_app();
-        return;
-    }
-    window.close();
-}
 
-window.addEventListener('beforeunload', () => {
-    if (typeof eel !== 'undefined' && typeof eel.close_app === 'function') {
-        eel.close_app();
-    }
-});
+
 
 
 // --- 7. EVENT LISTENERS ---
@@ -148,9 +136,7 @@ startBtn.addEventListener('click', toggleTimer);
 resetBtn.addEventListener('click', resetTimer);
 snoozeBtn.addEventListener('click', snoozeTimer); // Attached Snooze listener
 
-if (closeAPPBtn) {
-    closeAPPBtn.addEventListener('click', closeApp);
-}
+
 
 // Connect the plus/minus buttons dynamically
 const adjustButtons = document.querySelectorAll('.btn-adjust');
