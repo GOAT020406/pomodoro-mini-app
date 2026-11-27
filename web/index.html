@@ -1,61 +1,69 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple Pomodoro timer with adjustable session and break lengths.">
+    <meta name="theme-color" content="#c2cbce">
     <title>Pomodoro Timer</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- ADD inside <head> -->
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="apple-touch-icon" href="icon-192.png">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#c2cbce">
 
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
-   <!--outer device container-->
-  <div class="device-container"> 
-    <!-- Main Physical Device Shell -->
-    <div class="device-card">
-        
-        <!-- White  Screen -->
-        <div class="lcd-screen">
-            <span class="session-label">SESSION</span>
-            <div id="timer-display">25:00</div>
-            
-            <div class="main-buttons">
-                <button id="start-btn">Start</button>
-                <button id="snooze-btn">Snooze</button>
-                <button id="reset-btn">Reset</button>
+    <!-- Outer device container -->
+    <div class="device-container">
+        <!-- Main physical device shell -->
+        <div class="device-card">
+
+            <!-- White screen -->
+            <div class="lcd-screen">
+                <span class="session-label" id="phase-label">SESSION</span>
+                <div id="timer-display" role="timer" aria-live="off">25:00</div>
+
+                <div class="main-buttons">
+                    <button id="start-btn" type="button">Start</button>
+                    <button id="snooze-btn" type="button" disabled
+                            title="Available while the alarm is ringing">Snooze</button>
+                    <button id="reset-btn" type="button">Reset</button>
+                </div>
+            </div>
+
+            <!-- Lower controls -->
+            <div class="controls-row">
+
+                <!-- Break length -->
+                <div class="control-card">
+                    <div class="screen-box">
+                        <button class="btn-adjust" type="button" data-target="break" data-delta="-1"
+                                aria-label="Decrease break length">-</button>
+                        <span class="length-val" id="break-val">5</span>
+                        <button class="btn-adjust" type="button" data-target="break" data-delta="1"
+                                aria-label="Increase break length">+</button>
+                    </div>
+                    <span class="control-label">Break Length</span>
+                </div>
+
+                <!-- Session length -->
+                <div class="control-card">
+                    <div class="screen-box">
+                        <button class="btn-adjust" type="button" data-target="session" data-delta="-1"
+                                aria-label="Decrease session length">-</button>
+                        <span class="length-val" id="session-val">25</span>
+                        <button class="btn-adjust" type="button" data-target="session" data-delta="1"
+                                aria-label="Increase session length">+</button>
+                    </div>
+                    <span class="control-label">Session Length</span>
+                </div>
+
             </div>
         </div>
-
-        <!-- Lower Controls Section -->
-        <div class="controls-row">
-            
-            <!-- Break Length Control Box -->
-            <div class="control-card">
-                <div class="screen-box">
-                    <button class="btn-adjust">-</button>
-                    <span class="length-val">5</span>
-                    <button class="btn-adjust">+</button>
-                </div>
-                <span class="control-label">Break Length</span>
-            </div>
-
-            <!-- Session Length Control Box -->
-            <div class="control-card">
-                <div class="screen-box">
-                    <button class="btn-adjust">-</button>
-                    <span class="length-val">25</span>
-                    <button class="btn-adjust">+</button>
-                </div>
-                <span class="control-label">Session Length</span>
-            </div>
-  </div>
     </div>
-  </div>
-<script src="script.js"></script>
+
+    <!-- Provided by Eel in the desktop app; harmlessly missing on the web. -->
+    <script src="/eel.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
