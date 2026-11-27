@@ -40,7 +40,7 @@ In the repository: **Settings → Pages → Source: GitHub Actions**. After that
 
 - **Start / Pause** – start or pause the countdown.
 - **Reset** – back to a fresh session.
-- **Snooze** – enabled while the alarm rings; repeats the phase that just ended for 2 more minutes.
+- **Snooze** – enabled while the alarm rings; stops the alarm sound (the timer keeps running).
 - **+ / −** – change break and session length (1–60 minutes) while the timer is stopped.
 
 ## License

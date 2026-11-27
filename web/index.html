@@ -26,7 +26,7 @@
                 <div class="main-buttons">
                     <button id="start-btn" type="button">Start</button>
                     <button id="snooze-btn" type="button" disabled
-                            title="Available while the alarm is ringing">Snooze</button>
+                            title="Stops the alarm sound">Snooze</button>
                     <button id="reset-btn" type="button">Reset</button>
                 </div>
             </div>
@@ -62,7 +62,13 @@
         </div>
     </div>
 
-    <!-- eel.js (desktop app only) is loaded by script.js when running on localhost. -->
+    <!-- Desktop app only (served from localhost): eel.js must load before the page
+         finishes loading, so it is written in here. The website never requests it. -->
+    <script>
+        if (['localhost', '127.0.0.1'].indexOf(location.hostname) !== -1) {
+            document.write('<script src="/eel.js"><\/script>');
+        }
+    </script>
     <script src="script.js"></script>
 </body>
 </html>

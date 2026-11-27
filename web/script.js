@@ -7,7 +7,6 @@
 // --- 1. STATE ---
 const MIN_LENGTH = 1;
 const MAX_LENGTH = 60;
-const SNOOZE_SECONDS = 2 * 60;
 const MAX_RING_MS = 30 * 1000;   // alarm rings at most this long
 
 let sessionMins = 25;
@@ -98,14 +97,9 @@ function toggleTimer() {
 }
 
 // --- 7. SNOOZE ---
-// While the alarm rings, go back to the phase that just ended for 2 more minutes.
+// Only silences the looping alarm. The timer itself carries on untouched.
 function snoozeTimer() {
-    if (!ringing) return;
     stopRinging();
-    isWorkPhase = !isWorkPhase;
-    remaining = SNOOZE_SECONDS;
-    endAt = Date.now() + remaining * 1000;
-    render();
 }
 
 // --- 8. RESET ---
@@ -150,14 +144,27 @@ document.querySelectorAll('.btn-adjust').forEach((btn) => {
 });
 
 // --- 11. DESKTOP vs WEB ---
-// The desktop app (Eel) serves this page from localhost. There we load
-// eel.js, which lets Python notice when the window is closed. On the hosted
-// website (GitHub Pages) eel.js does not exist, so it is never requested.
+// The desktop app (Eel) serves this page from localhost; the hosted website
+// does not. (index.html loads eel.js only in the desktop app.)
 const isDesktopApp = ['localhost', '127.0.0.1'].includes(location.hostname);
+
+// Desktop only: resize the window so it fits the device exactly, whatever the
+// operating system's title bar, borders or display scaling are.
+function fitWindowToContent() {
+    try {
+        const box = document.querySelector('.device-container').getBoundingClientRect();
+        const style = getComputedStyle(document.body);
+        const innerW = Math.ceil(box.width + parseFloat(style.paddingLeft) + parseFloat(style.paddingRight));
+        const innerH = Math.ceil(box.height + parseFloat(style.paddingTop) + parseFloat(style.paddingBottom));
+        const frameW = window.outerWidth - window.innerWidth;   // borders
+        const frameH = window.outerHeight - window.innerHeight; // title bar + borders
+        window.resizeTo(innerW + frameW, innerH + frameH);
+    } catch (err) {
+        console.log('Could not resize window:', err);
+    }
+}
 if (isDesktopApp) {
-    const eelScript = document.createElement('script');
-    eelScript.src = '/eel.js';
-    document.head.appendChild(eelScript);
+    window.addEventListener('load', fitWindowToContent);
 }
 
 // --- 12. OFFLINE SUPPORT (web version only) ---
