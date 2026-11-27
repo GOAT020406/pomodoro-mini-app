@@ -149,10 +149,19 @@ document.querySelectorAll('.btn-adjust').forEach((btn) => {
     });
 });
 
-// --- 11. OFFLINE SUPPORT (web version only) ---
-// The desktop app (Eel) serves files from disk, so it does not need the
-// service worker. `eel` only exists there.
-const isDesktopApp = typeof eel !== 'undefined';
+// --- 11. DESKTOP vs WEB ---
+// The desktop app (Eel) serves this page from localhost. There we load
+// eel.js, which lets Python notice when the window is closed. On the hosted
+// website (GitHub Pages) eel.js does not exist, so it is never requested.
+const isDesktopApp = ['localhost', '127.0.0.1'].includes(location.hostname);
+if (isDesktopApp) {
+    const eelScript = document.createElement('script');
+    eelScript.src = '/eel.js';
+    document.head.appendChild(eelScript);
+}
+
+// --- 12. OFFLINE SUPPORT (web version only) ---
+// The desktop app does not need the service worker.
 if ('serviceWorker' in navigator && !isDesktopApp && location.protocol.startsWith('http')) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js').catch((err) => {

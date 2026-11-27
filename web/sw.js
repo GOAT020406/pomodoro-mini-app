@@ -1,5 +1,5 @@
 // Bump CACHE_NAME whenever the files below change, so users get the update.
-const CACHE_NAME = 'pomodoro-cache-v2';
+const CACHE_NAME = 'pomodoro-cache-v3';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -29,16 +29,26 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Network first (so updates show up), falling back to the cache when offline.
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   if (request.method !== 'GET' || new URL(request.url).origin !== self.location.origin) {
     return;
   }
+
+  // Audio is requested in byte ranges (partial responses, status 206), which
+  // the Cache API cannot store. Use the full file we cached at install time.
+  if (request.headers.has('range')) {
+    event.respondWith(
+      caches.match(request.url).then((cached) => cached || fetch(request))
+    );
+    return;
+  }
+
+  // Network first (so updates show up), falling back to the cache when offline.
   event.respondWith(
     fetch(request)
       .then((response) => {
-        if (response.ok) {
+        if (response.status === 200) {   // only cache complete responses
           const copy = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
         }
